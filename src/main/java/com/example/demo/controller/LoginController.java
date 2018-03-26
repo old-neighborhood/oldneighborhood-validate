@@ -17,9 +17,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Admin;
 import com.example.demo.entity.Saler;
@@ -37,6 +35,11 @@ import com.example.demo.service.LoginService;
 public class LoginController {
 	@Resource
 	private LoginService loginService;
+	
+	@RequestMapping("/")
+	public String test1() {
+		return "/login";
+	}
 	
 	@RequestMapping("/userIndex")
 	public String User() {
@@ -69,11 +72,10 @@ public class LoginController {
 		String password = reqMap.get("password").toString();
 		String type = reqMap.get("type").toString();
 		System.out.println(username+" "+password+" "+type);
-		String json ="";
 		if(type.equals("user")) {
 			User user = loginService.userLogin(username, password);
 			if(user!=null) 
-				return json= "{\"result\":\"success\",\"user\":\""+user.getU_ID()+"\",\"type\":\""+type+"\"}";
+				return "{\"result\":\"success\",\"user\":\""+user.getU_ID()+"\",\"type\":\""+type+"\"}";
 			
 		}else if(type.equals("saler")) {
 			Saler saler = loginService.salerLogin(username, password);
@@ -84,6 +86,6 @@ public class LoginController {
 			if(admin!=null)
 				return "{\"result\":\"success\",\"admin\":\""+admin.getAd_ID()+"\",\"type\":\""+type+"\"}";
 		}
-		return json= "{\"result\":\"error\"}";
+		return "{\"result\":\"error\"}";
 	}
 }

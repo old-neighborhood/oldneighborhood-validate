@@ -59,11 +59,11 @@ $().ready(function() {
     				console.log(data);
     				var o=eval('('+data+')');
     		if (type=="user"&&o.result=="success") {
-        		window.location.href="/Saler/userIndex";
+        		window.location.href="userIndex.html";
     		}else if (type=="saler"&&o.result=="success"){
-    			window.location.href="/Saler/salerIndex";
+    			window.location.href="salerIndex.html";
     		}else if (type=="admin"&&o.result=="success"){
-    			window.location.href="/Saler/adminIndex";
+    			window.location.href="adminIndex.html";
     		}else if(o.result=="error"){
     			layer.msg("账号或密码错误！" , {anim: 6 });
     		}

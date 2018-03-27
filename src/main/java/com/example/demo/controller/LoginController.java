@@ -40,7 +40,14 @@ public class LoginController {
 	public String test1() {
 		return "/login";
 	}
-	
+	@RequestMapping("/salerInfo")
+	public String salerInfo() {
+		return "/SalerInfo";
+	}
+	@RequestMapping("/salerInfoModify")
+	public String salerInfoModify() {
+		return "/SalerInfoModify";
+	}
 	@RequestMapping("/userIndex")
 	public String User() {
 		return "/userIndex";

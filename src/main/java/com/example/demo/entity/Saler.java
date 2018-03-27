@@ -50,7 +50,20 @@ public class Saler implements Serializable {
 	 */
 
 	private static final long serialVersionUID = 2668145710877057941L;
-
+	 /**  
+     * 创建一个新的实例 Saler.  
+     *  
+     * @param s_ID
+     * @param s_name
+     * @param s_password
+     * @param s_image
+     * @param s_tele
+     * @param s_email
+     * @param s_address
+     * @param s_signature
+     * @param s_score
+     * @param s_date  
+     */ 
 	@Id
 	@NonNull
 	private String s_ID;

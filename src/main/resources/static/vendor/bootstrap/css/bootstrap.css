@@ -562,7 +562,7 @@ mark,
   border-radius: 0.25rem;
   transition: all 0.2s ease-in-out;
   max-width: 100%;
-  height: auto;
+  height: 50px;
 }
 
 .figure {

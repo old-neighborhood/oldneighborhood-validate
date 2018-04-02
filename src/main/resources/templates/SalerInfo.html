@@ -4,13 +4,17 @@
 <meta charset="UTF-8"/>
 <title>Insert title here</title>
   <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-  <!-- Custom fonts for this template-->
   <link href="./vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-  <!-- Custom styles for this template-->
   <link href="./css/sb-admin.css" rel="stylesheet"/>
 </head>
 <body>
 <h1>SalerInfo</h1>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="salerIndex">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">salerInfo</li>
+  </ol>
+</nav>
 	<div class="container">
 		<div class="card card-login mx-auto mt-5">
 			<div class="card-header">个人信息</div>
@@ -27,17 +31,12 @@
 
 		<div class="modal-dialog" id="large-image"></div>
 	</div>
-	<!-- <script src="./vendor/jquery/jquery.min.js"></script> -->
 	<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
     <script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
     <script src="./vendor/datatables/jquery.dataTables.js"></script>
     <script src="./vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
     <script src="./js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
     <script src="./js/sb-admin-datatables.min.js"></script>
 	<script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
 	<script type="text/javascript">
@@ -63,24 +62,35 @@
 }
 	$().ready(function() {
 		
+		var s_ID = "";
+		$.ajax({
+		    async: false,
+		    type: "GET",
+		    cache:false, 
+		    //dataType: 'json',
+		    url: "http://127.0.0.1:8001/Saler/getID",
+		    timeout: 3000,
+		    contentType: "application/json;utf-8",
+		    success: function(msg) {
+		    	s_ID = msg;
+		    },error:function(XMLHttpRequest, textStatus, errorThrown){ //请求失败时被调用的函数。3个参数：XMLHttpRequest对象、错误信息、捕获的错误对象
+		    	console.log(textStatus+":"+errorThrown);
+		    	layer.msg("请求未成功" , {anim: 6 });
+		    }});
 		 
 			 $.ajax({
 				    async: false,
 				    type: "GET",
 				    cache:false, 
-				    dataType: 'jsonp',
-				    jsonp: 'callback',
-				    jsonpCallback: 'api_callback',
+				    dataType: 'json',
 				    url: "http://127.0.0.1:8002/Saler/info",
-				    data: {"key":"SH00000001"},
+				    data:{"s_ID":s_ID},
 				    timeout: 3000,
-				   // contentType: "application/jsonp;utf-8",
+				    contentType: "application/json;utf-8",
 				    success: function(msg) {
-				      console.log(msg);
-				      var info = msg.parameters[0];
+				      console.log(s_ID);
 			 			var infoTable = $('#infoTable');
-			 			var info = msg.parameters[0];
-			 			var infoTable = $('#infoTable');
+			 			var info = msg;
 				     	var salerId = info.s_ID;
 						var salerName = info.s_name;
 						var salerPassword = info.s_password;
@@ -97,7 +107,7 @@
 						infoTable.html(
 								 '<tbody>'
 								+'<tr><td>image</td><td>'
-								+'<img data-toggle="modal" data-target="#myModal" alt="头像" id="head" class="rounded-circle img-thumbnail img-responsive" height="50" width="50" src="http://localhost:8888/Saler/'+ salerImage
+								+'<img data-toggle="modal" data-target="#myModal" alt="头像" id="head" class="rounded-circle img-thumbnail img-responsive" height="50" width="50" src="http://localhost:8001/Saler/'+ salerImage
 								+ '"/></td></tr>'
 								+'<tr><td>ID</td><td>'+ salerId + '</td></tr>'
 								+'<tr><td>name</td><td>'+ salerName + '</td></tr>'

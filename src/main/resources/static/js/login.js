@@ -37,9 +37,6 @@ $().ready(function() {
 			'password':passwd,
 			'type':type
         });
-    	//alert(json);
-  
-    	console.log(json);
     	$.ajax({
     		type: "post",
     		url: "/Saler/login",
@@ -59,11 +56,17 @@ $().ready(function() {
     				console.log(data);
     				var o=eval('('+data+')');
     		if (type=="user"&&o.result=="success") {
-        		window.location.href="userIndex.html";
+    			layer.msg("登录成功" , {anim: 6 });
+           	 setTimeout('window.location.href="userIndex.html"',1000);
+        		//window.location.href="userIndex.html";
     		}else if (type=="saler"&&o.result=="success"){
-    			window.location.href="salerIndex.html";
+    			layer.msg("登录成功" , {anim: 6 });
+              	 setTimeout('window.location.href="salerIndex.html"',1000);
+    			//window.location.href="salerIndex.html";
     		}else if (type=="admin"&&o.result=="success"){
-    			window.location.href="adminIndex.html";
+    			layer.msg("登录成功" , {anim: 6 });
+              	 setTimeout('window.location.href="adminIndex.html"',1000);
+    			//window.location.href="adminIndex.html";
     		}else if(o.result=="error"){
     			layer.msg("账号或密码错误！" , {anim: 6 });
     		}

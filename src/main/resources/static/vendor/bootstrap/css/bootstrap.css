@@ -4710,6 +4710,7 @@ tbody.collapse.show {
 .media {
   display: -ms-flexbox;
   display: flex;
+  border:1px solid #000;
   -ms-flex-align: start;
       align-items: flex-start;
 }

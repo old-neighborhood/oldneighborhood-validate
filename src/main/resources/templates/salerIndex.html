@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <title>Insert title here</title>
+  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="./vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+  <link href="./css/sb-admin.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>This is SalerIndex Page.</h1>
-<button id="getInfo">获取个人信息</button>
-<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+	<h1>This is SalerIndex Page.</h1>
+	<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ol>
+</nav>
+	<div>
+		<button id="getInfo">获取个人信息</button>
+	</div>
+	<div>
+		<button id="getMarkets">获取店铺列表</button>
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
 	<script type="text/javascript">
-		$("#getInfo").click(function(){
-			window.location.href="salerInfo.html";
+		$("#getInfo").click(function() {
+			window.location.href = "salerInfo";
+		});
+		$("#getMarkets").click(function() {
+			window.location.href = "marketList";
 		});
 	</script>
 </body>

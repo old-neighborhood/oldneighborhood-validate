@@ -40,6 +40,23 @@ public class LoginController {
 	public String test1() {
 		return "/login";
 	}
+	@RequestMapping("/marketList")
+	public String getMarkets() {
+		return "/MarketList";
+	}
+	@RequestMapping("/applyMarket")
+	public String applyMarket() {
+		return "/ApplyMarket";
+	}
+	@RequestMapping("/modifyMarket")
+	public String modifyMarket() {
+		return "/ModifyMarket";
+	}
+	@RequestMapping("/marketInfo")
+	public String getMarketInfo() {
+		return "/MarketInfo";
+	}
+	
 	@RequestMapping("/salerInfo")
 	public String salerInfo() {
 		return "/SalerInfo";
@@ -71,6 +88,12 @@ public class LoginController {
 	    * @return String    返回类型  
 	    * @throws  
 	    */  
+	    String ID = "";
+		@RequestMapping("/getID")
+		@ResponseBody
+		public String getID() {
+			return ID;
+		}
 	    
 	@RequestMapping("/login")
 	@ResponseBody
@@ -78,20 +101,25 @@ public class LoginController {
 		String username = reqMap.get("username").toString();
 		String password = reqMap.get("password").toString();
 		String type = reqMap.get("type").toString();
-		System.out.println(username+" "+password+" "+type);
+		System.out.println("here"+username+" "+password+" "+type);
 		if(type.equals("user")) {
 			User user = loginService.userLogin(username, password);
-			if(user!=null) 
+			if(user!=null) { 
+				ID = user.getU_ID();
 				return "{\"result\":\"success\",\"user\":\""+user.getU_ID()+"\",\"type\":\""+type+"\"}";
-			
+			}
 		}else if(type.equals("saler")) {
 			Saler saler = loginService.salerLogin(username, password);
-			if(saler!=null)
+			if(saler!=null) {
+				ID = saler.getS_ID();
 				return "{\"result\":\"success\",\"saler\":\""+saler.getS_ID()+"\",\"type\":\""+type+"\"}";
+			}
 		}else if(type.equals("admin")) {
 			Admin admin = loginService.adminLogin(username, password);
-			if(admin!=null)
+			if(admin!=null) {
+				ID = admin.getAd_ID();
 				return "{\"result\":\"success\",\"admin\":\""+admin.getAd_ID()+"\",\"type\":\""+type+"\"}";
+			}
 		}
 		return "{\"result\":\"error\"}";
 	}

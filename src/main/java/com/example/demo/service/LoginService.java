@@ -8,4 +8,5 @@ public interface LoginService {
 	public User userLogin(String name,String password);
 	public Saler salerLogin(String name,String password);
 	public Admin adminLogin(String name,String password);
+	public String getInfo(String ID, String type);
 }

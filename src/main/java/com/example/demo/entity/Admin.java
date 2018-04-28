@@ -64,4 +64,6 @@ public class Admin implements Serializable{
 	private String ad_password;
 	@NonNull
 	private String ad_image;
+	@NonNull
+	private String ad_permission;
 }

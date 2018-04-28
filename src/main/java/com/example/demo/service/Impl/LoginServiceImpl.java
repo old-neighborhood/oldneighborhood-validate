@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.AdminDao;
 import com.example.demo.dao.SalerDao;
 import com.example.demo.dao.UserDao;
@@ -41,6 +42,18 @@ public class LoginServiceImpl implements LoginService {
 		if(admin!=null&&admin.getAd_password().equals(password))
 			return admin;
 		return null;
+	}
+
+	@Override
+	public String getInfo(String ID, String type) {
+		// TODO Auto-generated method stub
+		System.out.println(JSONObject.toJSONString(salerDao.findOne(ID)));
+		if(type.equals("saler"))
+			return JSONObject.toJSONString(salerDao.findOne(ID));
+		else if(type.equals("user"))
+			return JSONObject.toJSONString(userDao.findOne(ID));
+		else 
+			return JSONObject.toJSONString(adminDao.findOne(ID));
 	}
 
 }

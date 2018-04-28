@@ -37,45 +37,9 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@RequestMapping("/")
+	@ResponseBody
 	public String test1() {
 		return "/login";
-	}
-	@RequestMapping("/marketList")
-	public String getMarkets() {
-		return "/MarketList";
-	}
-	@RequestMapping("/applyMarket")
-	public String applyMarket() {
-		return "/ApplyMarket";
-	}
-	@RequestMapping("/modifyMarket")
-	public String modifyMarket() {
-		return "/ModifyMarket";
-	}
-	@RequestMapping("/marketInfo")
-	public String getMarketInfo() {
-		return "/MarketInfo";
-	}
-	
-	@RequestMapping("/salerInfo")
-	public String salerInfo() {
-		return "/SalerInfo";
-	}
-	@RequestMapping("/salerInfoModify")
-	public String salerInfoModify() {
-		return "/SalerInfoModify";
-	}
-	@RequestMapping("/userIndex")
-	public String User() {
-		return "/userIndex";
-	}
-	@RequestMapping("/salerIndex")
-	public String Saler() {
-		return "/salerIndex";
-	}
-	@RequestMapping("/adminIndex")
-	public String Admin() {
-		return "/adminIndex";
 	}
 	  
 	    /**  
@@ -95,6 +59,16 @@ public class LoginController {
 			return ID;
 		}
 	    
+		@RequestMapping("/getInfo")
+		@ResponseBody
+		public String getInfo(@RequestBody Map<String,Object> reqMap) {
+			return loginService.getInfo(
+					reqMap.get("ID").toString(),
+					reqMap.get("type").toString()
+					);
+		}
+		
+		
 	@RequestMapping("/login")
 	@ResponseBody
 	public String login(@RequestBody Map<String,Object> reqMap) {
@@ -106,19 +80,19 @@ public class LoginController {
 			User user = loginService.userLogin(username, password);
 			if(user!=null) { 
 				ID = user.getU_ID();
-				return "{\"result\":\"success\",\"user\":\""+user.getU_ID()+"\",\"type\":\""+type+"\"}";
+				return "{\"result\":\"success\",\"ID\":\""+user.getU_ID()+"\",\"type\":\""+type+"\"}";
 			}
 		}else if(type.equals("saler")) {
 			Saler saler = loginService.salerLogin(username, password);
 			if(saler!=null) {
 				ID = saler.getS_ID();
-				return "{\"result\":\"success\",\"saler\":\""+saler.getS_ID()+"\",\"type\":\""+type+"\"}";
+				return "{\"result\":\"success\",\"ID\":\""+saler.getS_ID()+"\",\"type\":\""+type+"\"}";
 			}
 		}else if(type.equals("admin")) {
 			Admin admin = loginService.adminLogin(username, password);
 			if(admin!=null) {
 				ID = admin.getAd_ID();
-				return "{\"result\":\"success\",\"admin\":\""+admin.getAd_ID()+"\",\"type\":\""+type+"\"}";
+				return "{\"result\":\"success\",\"ID\":\""+admin.getAd_ID()+"\",\"type\":\""+type+"\"}";
 			}
 		}
 		return "{\"result\":\"error\"}";
